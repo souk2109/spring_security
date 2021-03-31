@@ -5,4 +5,12 @@
 	<select id="getAllUser" resultType="org.security.domain.UserVO">
 		SELECT * FROM tbl_user
 	</select>
+	
+	<insert id="insertUser">
+		insert into tbl_user(id, pwd, username) values(#{id},#{pwd}, #{userName});
+	</insert>
+	
+	<insert id="insertAuth">
+		insert into tbl_user_auth values(#{id},#{auth});
+	</insert>
 </mapper>

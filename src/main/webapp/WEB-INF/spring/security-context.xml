@@ -11,7 +11,7 @@
 	<bean id="authSuccessHandler"
 		class="org.security.security.AuthSuccessHandler"></bean>
 
-	<bean id="passwordEncoder"
+	<bean id="userPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 
 	<security:http>
@@ -34,7 +34,7 @@
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:password-encoder
-				ref="PasswordEncoder" />
+				ref="userPasswordEncoder" />
 			<security:jdbc-user-service
 				data-source-ref="dataSource" />
 		</security:authentication-provider>
