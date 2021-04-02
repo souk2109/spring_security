@@ -23,4 +23,8 @@
 		on user.id = auth.id
 		where user.id = #{id}
 	</select>
+	
+	<insert id="insert">
+		insert into tbl_user(id, pwd, username) values(#{id},#{pwd},#{userName})
+	</insert>
 </mapper>

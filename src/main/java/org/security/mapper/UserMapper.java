@@ -7,4 +7,5 @@ import org.security.domain.UserVO;
 
 public interface UserMapper {
 	public UserVO getUser(String id);
+	public int insert(UserVO UserVO);
 }
