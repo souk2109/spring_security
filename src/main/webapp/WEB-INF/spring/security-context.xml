@@ -15,28 +15,46 @@
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 
 	<security:http>
+
 		<security:access-denied-handler
 			ref="accessDeniedHandler" />
+
 		<security:intercept-url pattern="/security/all"
 			access="permitAll" />
+
 		<security:intercept-url
-			pattern="/security/member" access="hasRole('ROLE_MEMBER')" />
+			pattern="/security/member"
+			access="hasRole('ROLE_MEMBER') or hasRole('ROLE_ADMIN')" />
+
 		<security:intercept-url
 			pattern="/security/admin" access="hasRole('ROLE_ADMIN')" />
+
 		<security:form-login login-page="/user/login"
+			login-processing-url="/doLogin"
 			authentication-success-handler-ref="authSuccessHandler"
 			username-parameter="id" password-parameter="pwd" />
 
 		<security:csrf disabled="true" />
 
 	</security:http>
-
+	
+	<bean id="customService"
+		class="org.security.security.CustomDetailServiceImpl"></bean>
+		
+	
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:password-encoder
-				ref="userPasswordEncoder" />
-			<security:jdbc-user-service
-				data-source-ref="dataSource" />
+		<security:authentication-provider
+			user-service-ref="customService">
+			<security:password-encoder ref="userPasswordEncoder" />
 		</security:authentication-provider>
+
 	</security:authentication-manager>
+
+	<!-- UserDetailService를 구현하게되면 아래 코드는 사용안해도됨. db는 대신 mapper를 통해 조회
+	
+	<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select 
+		id, pwd, enabled from tbl_user where id=?" authorities-by-username-query="select 
+		id, auth from tbl_user_auth where id=?"/>
+	-->
+
 </beans>

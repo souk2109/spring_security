@@ -2,15 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.security.mapper.UserMapper">
-	<select id="getAllUser" resultType="org.security.domain.UserVO">
-		SELECT * FROM tbl_user
+	<resultMap type="org.security.domain.UserVO" id="userVO">
+		<result column="id" property="id" />
+		<result column="pwd" property="pwd" />
+		<result column="userName" property="userName" />
+		<result column="regDate" property="regDate" />
+		<result column="updateDate" property="updateDate" />
+		<result column="enabled" property="enabled" />
+		<collection property="authList" resultMap="authVO"></collection>
+	</resultMap>
+	<resultMap type="org.security.domain.AuthVO" id="authVO">
+		<result column="id" property="id" />
+		<result column="auth" property="auth" />
+	</resultMap>
+
+	<select id="getUser" resultMap="userVO">
+		SELECT user.*, auth.auth
+		FROM tbl_user user
+		left join tbl_user_auth auth
+		on user.id = auth.id
+		where user.id = #{id}
 	</select>
-	
-	<insert id="insertUser">
-		insert into tbl_user(id, pwd, username) values(#{id},#{pwd}, #{userName});
-	</insert>
-	
-	<insert id="insertAuth">
-		insert into tbl_user_auth values(#{id},#{auth});
-	</insert>
 </mapper>

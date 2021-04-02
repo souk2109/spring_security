@@ -8,7 +8,7 @@
 </head>
 <body>
 	${msg }
-	<form action="/controller/login" method="post">
+	<form action="/doLogin" method="post">
 		아이디 : <input type="text" name="id">
 		비밀번호 : <input type="password" name="pwd">
 		<input type="submit" value="전송">

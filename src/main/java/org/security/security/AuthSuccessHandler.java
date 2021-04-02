@@ -24,17 +24,17 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 		});
 		
 		if (authList.contains("ROLE_ADMIN")) {
-			System.out.println("관리자이므로 member로 이동");
-			response.sendRedirect("/controller/security/member");
+			System.out.println("관리자인데 그냥 all로  이동");
+			response.sendRedirect("/security/all");
 			return;
 		}
 		if (authList.contains("ROLE_MEMBER")) {
-			System.out.println("멤버이므로 all로 이동");
-			response.sendRedirect("/controller/security/all");
+			System.out.println("멤버인데 그냥 all로  이동");
+			response.sendRedirect("/security/all");
 			return;
 		}
 		System.out.println("관한이 없으므로  all로 이동");
-		response.sendRedirect("/controller/");
+		response.sendRedirect("/");
 	}
 
 }

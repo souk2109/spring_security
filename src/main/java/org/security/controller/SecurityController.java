@@ -25,4 +25,5 @@ public class SecurityController {
 	public void errorPage(Authentication auth) {
 		System.out.println("에러, 권한 : "+auth.getAuthorities()); 
 	}
+	
 }

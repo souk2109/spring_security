@@ -1,6 +1,7 @@
 package org.security.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,4 +13,5 @@ public class UserVO {
 	private Date regDate;
 	private Date updateDate;
 	private boolean enabled;
+	private List<AuthVO> authList;
 }
